@@ -1,20 +1,20 @@
 import React from 'react'
 
-export const roomSorter = (roomList, floorNumber) => {
+export const nodeSorter = (nodeList, cluster) => {
   
-  let copiedList = roomList.slice(0)
+  let filteredList = nodeList.slice(0)
   
-  // filter list of rooms to those on the given floor
-  let filteredList = copiedList.filter(room => {
-    return room.floor === floorNumber
-  })
+  // filter list of nodes to those on the given floor
+  // let filteredList = copiedList.filter(node => {
+  //   return node.cluster === cluster
+  // })
   
-  // function to sort rooms numerically by their floor number
-  const numericalSort = roomList => { 
-    return roomList.sort((first, second) => {
-      const firstRoom = first.name.replace(/\D+/, '')
-      const secondRoom = second.name.replace(/\D+/, '')
-      if (parseInt(firstRoom) > parseInt(secondRoom)) {
+  // function to sort nodes numerically by their floor number
+  const numericalSort = nodeList => { 
+    return nodeList.sort((first, second) => {
+      const firstNode = first.name.replace(/\D+/, '')
+      const secondNode = second.name.replace(/\D+/, '')
+      if (parseInt(firstNode) > parseInt(secondNode)) {
         return 1
       } else {
         return 0
@@ -22,21 +22,21 @@ export const roomSorter = (roomList, floorNumber) => {
     })
   }
   
-  // numerically sort a new array with each room named 'Room'
-  let nameRoom = numericalSort(
-    filteredList.filter(room => room.name[0] === 'R')
+  // numerically sort a new array with each node named 'Nodes'
+  let nameNode = numericalSort(
+    filteredList.filter(node => node.name[0] === 'R')
   )
   
-  // numerically sort a new array with each room named 'Studio'
+  // numerically sort a new array with each node named 'Studio'
   let nameStudio = numericalSort(
-    filteredList.filter(room => room.name[0] === 'S')
+    filteredList.filter(node => node.name[0] === 'S')
   )
   
-  // numerically sort a new array with all other named room types
+  // numerically sort a new array with all other named node types
   let nameOther = numericalSort(
-    filteredList.filter(room => room.name[0] !== 'S' && room.name[0] !== 'R')
+    filteredList.filter(node => node.name[0] !== 'S' && node.name[0] !== 'R')
   )
   
-  // re-combine the sorted rooms, studios and others into a single array
-  return nameRoom.concat(nameStudio).concat(nameOther)
+  // re-combine the sorted nodes, studios and others into a single array
+  return nameNode.concat(nameStudio).concat(nameOther)
 }

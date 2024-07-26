@@ -1,17 +1,17 @@
 import React from 'react'
-import RoomRow from './RoomRow'
-import { roomSorter } from '../helpers/sorter'
+import NodeRow from './NodeRow'
+import { nodeSorter } from '../helpers/sorter'
 
-const RoomsList = props => (
+const NodesList = props => (
   <table className="table">
     <tr className="table__row table__row--header">
       <th scope="colgroup" colSpan="15" className="table__cell--header table__cell--level table__cell--align-left">
-        Level Eight
+        Cluster
       </th>
     </tr>
     <tr className="table__row table__row--subheader">
       <th scope="col" className="table__cell--header table__cell--align-left">
-        Room
+        Node
       </th>
       <th scope="col" className="table__cell--header">
         8am
@@ -54,26 +54,26 @@ const RoomsList = props => (
       </th>
     </tr>
     <tbody className="table__body">
-      {props.rooms &&
-        roomSorter(props.rooms, '8').map(room => (
-          <RoomRow
-            key={room._id}
-            room={room}
-            bookings={room.bookings}
+      {props.nodes &&
+        nodeSorter(props.nodes, '8').map(node => (
+          <NodeRow
+            key={node._id}
+            node={node}
+            bookings={node.bookings}
             date={props.date === null ? new Date() : props.date}
             onShowBooking={props.onShowBooking}
-            onSetRoom={props.onSetRoom}
+            onSetNode={props.onSetNode}
           />
         ))}
     </tbody>
-    <tr className="table__row table__row--header">
+    {/* <tr className="table__row table__row--header">
       <th scope="colgroup" colSpan="15" className="table__cell--header table__cell--level table__cell--align-left">
         Level Thirteen
       </th>
     </tr>
     <tr className="table__row table__row--subheader">
       <th scope="col" className="table__cell--header table__cell--width table__cell--align-left">
-        Room
+        Node
       </th>
       <th scope="col" className="table__cell--header">
         8am
@@ -114,17 +114,17 @@ const RoomsList = props => (
       <th scope="col" className="table__cell--header">
         8pm
       </th>
-    </tr>
+    </tr> */}
     <tbody className="table__body">
-      {props.rooms &&
-        roomSorter(props.rooms, '13').map(room => (
-          <RoomRow
-            key={room._id}
-            room={room}
-            bookings={room.bookings}
+      {props.nodes &&
+        nodeSorter(props.nodes, '').map(node => (
+          <NodeRow
+            key={node._id}
+            node={node}
+            bookings={node.bookings}
             date={props.date === null ? new Date() : props.date}
             onShowBooking={props.onShowBooking}
-            onSetRoom={props.onSetRoom}
+            onSetNode={props.onSetNode}
           />
         ))
       }
@@ -132,4 +132,4 @@ const RoomsList = props => (
   </table>
 )
 
-export default RoomsList
+export default NodesList

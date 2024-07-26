@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:5.0.28
+    ports:
+      - 27017:27017
+    volumes:
+      - "./data:/data"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: dangerous
+
+
+# export JWT_SECRET=12345678
+# export JWT_ALGORITHM=HS256
+# export JWT_EXPIRES_IN=86400000
+
+# export MONGO_URI=mongodb://root:dangerous@10.50.26.186:27017
+# export REACT_APP_API_URL=http://10.50.26.186:9091

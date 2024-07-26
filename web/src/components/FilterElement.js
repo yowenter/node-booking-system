@@ -19,19 +19,11 @@ function FilterElement({
     <div className="sidebar__box--filter filter">
       <h3 className="header__heading header__heading--sidebar">Filter</h3>
       <form className="form form--filter">
-        <h4 className="form__heading form__heading--filter">Level</h4>
+        <h4 className="form__heading form__heading--filter">Cluster</h4>
         <div className="form__group" onChange={(event) => onSetFloorParam(event.target.value)}>
           <div className="form_group">
-            <input type="radio" value="8" name="floor-select" className="form__input--radio" checked={floorParam === '8' ? true : false}/>
-            <label for="floor8" className="form__label form__label--inline">Level 8</label>
-          </div>
-          <div className="form_group">
-            <input type="radio" value="13" name="floor-select" className="form__input--radio" checked={floorParam === '13' ? true : false}/>
-            <label for="floor13" className="form__label form__label--inline">Level 13</label>
-          </div>
-          <div className="form_group">
             <input type="radio" value="all" name="floor-select" className="form__input--radio" checked={floorParam === 'all' ? true : false}/>
-            <label for="all" className="form__label form__label--inline">All Levels</label>
+            <label for="all" className="form__label form__label--inline">All Clusters</label>
           </div>
         </div>
 

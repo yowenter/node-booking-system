@@ -1,26 +1,26 @@
-const Room = require('./Room')
+const Node = require('./Nodes')
 
-Room.create([
+Node.create([
   // Level 8
   {
-    name: 'Room 1',
-    floor: '8',
+    name: 'Node 1',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       pcLab: true
     }
   },
   {
-    name: 'Room 2',
-    floor: '8',
+    name: 'Node 2',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       projector: true
     }
   },
   {
-    name: 'Room 3',
-    floor: '8',
+    name: 'Node 3',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       projector: true,
@@ -28,72 +28,72 @@ Room.create([
     }
   },
   {
-    name: 'Room 4',
-    floor: '8',
+    name: 'Node 4',
+    cluster: 'dev',
     capacity: 24
   },
   {
-    name: 'Room 5',
-    floor: '8',
+    name: 'Node 5',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       opWalls: true
     }
   },
   {
-    name: 'Room 6',
-    floor: '8',
+    name: 'Node 6',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 7',
-    floor: '8',
+    name: 'Node 7',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 8',
-    floor: '8',
+    name: 'Node 8',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 9',
-    floor: '8',
+    name: 'Node 9',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 10',
-    floor: '8',
+    name: 'Node 10',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 11',
-    floor: '8',
+    name: 'Node 11',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 12',
-    floor: '8',
+    name: 'Node 12',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       tv: true
     }
   },
   {
-    name: 'Room 13',
-    floor: '8',
+    name: 'Node 13',
+    cluster: 'dev',
     capacity: 18
   },
   {
-    name: 'Room 14',
-    floor: '8',
+    name: 'Node 14',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       tv: true
     }
   },
   {
-    name: 'Room 15',
-    floor: '8',
+    name: 'Node 15',
+    cluster: 'dev',
     capacity: 18,
     assets: {
       tv: true
@@ -101,32 +101,32 @@ Room.create([
   },
   {
     name: 'Studio 11',
-    floor: '8',
+    cluster: 'dev',
     capacity: 18
   },
   {
     name: 'Studio 12',
-    floor: '8',
+    cluster: 'dev',
     capacity: 18
   },
   {
     name: 'Studio 13',
-    floor: '8',
+    cluster: 'dev',
     capacity: 18
   },
   {
     name: 'Studio 14',
-    floor: '8',
+    cluster: 'dev',
     capacity: 18
   },
   {
     name: 'Studio 15',
-    floor: '8',
+    cluster: 'dev',
     capacity: 18
   },
   {
     name: 'Lab 01',
-    floor: '8',
+    cluster: 'dev',
     capacity: 20,
     assets: {
       macLab: true
@@ -134,7 +134,7 @@ Room.create([
   },
   // Level 13
   {
-    name: 'Room 1',
+    name: 'Node 1',
     floor: '13',
     capacity: 20,
     assets: {
@@ -142,7 +142,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 2',
+    name: 'Node 2',
     floor: '13',
     capacity: 20,
     assets: {
@@ -150,7 +150,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 3',
+    name: 'Node 3',
     floor: '13',
     capacity: 20,
     assets: {
@@ -158,7 +158,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 4',
+    name: 'Node 4',
     floor: '13',
     capacity: 20,
     assets: {
@@ -167,7 +167,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 5',
+    name: 'Node 5',
     floor: '13',
     capacity: 20,
     assets: {
@@ -175,7 +175,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 6',
+    name: 'Node 6',
     floor: '13',
     capacity: 20,
     assets: {
@@ -183,7 +183,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 7',
+    name: 'Node 7',
     floor: '13',
     capacity: 20,
     assets: {
@@ -191,7 +191,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 8/9',
+    name: 'Node 8/9',
     floor: '13',
     capacity: 40,
     assets: {
@@ -199,22 +199,22 @@ Room.create([
     }
   },
   {
-    name: 'Room 10',
+    name: 'Node 10',
     floor: '13',
     capacity: 16
   },
   {
-    name: 'Room 11',
+    name: 'Node 11',
     floor: '13',
     capacity: 20
   },
   {
-    name: 'Room 12',
+    name: 'Node 12',
     floor: '13',
     capacity: 20
   },
   {
-    name: 'Room 13',
+    name: 'Node 13',
     floor: '13',
     capacity: 20,
     assets: {
@@ -222,7 +222,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 14',
+    name: 'Node 14',
     floor: '13',
     capacity: 20,
     assets: {
@@ -230,7 +230,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 15',
+    name: 'Node 15',
     floor: '13',
     capacity: 20,
     assets: {
@@ -238,7 +238,7 @@ Room.create([
     }
   },
   {
-    name: 'Room 16',
+    name: 'Node 16',
     floor: '13',
     capacity: 20,
     assets: {
@@ -246,17 +246,17 @@ Room.create([
     }
   },
   {
-    name: 'Room 17',
+    name: 'Node 17',
     floor: '13',
     capacity: 20
   },
   {
-    name: 'Room 18',
+    name: 'Node 18',
     floor: '13',
     capacity: 20
   },
   {
-    name: 'Green Screen Room',
+    name: 'Green Screen Nodes',
     floor: '13',
     capacity: null,
     assets: {
@@ -264,8 +264,8 @@ Room.create([
     }
   }
 ])
-  .then((rooms) => {
-    console.log(`Created ${rooms.length} rooms.`)
+  .then((nodes) => {
+    console.log(`Created ${nodes.length} nodes.`)
   })
   .catch((error) => {
     console.error(error)

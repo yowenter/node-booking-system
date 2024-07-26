@@ -15,7 +15,7 @@ import Footer from './components/Footer'
 import Key from './components/Key'
 import MyBookings from './components/MyBookings'
 import NavBar from './components/NavBar'
-import RoomsList from './components/RoomsList'
+import NodesList from './components/NodesList'
 import SignInForm from './components/SignInForm'
 import SignUpForm from './components/SignUpForm'
 
@@ -24,18 +24,18 @@ import {
   signOut,
   signUp
 } from './api/auth'
-import { listRooms } from './api/rooms'
+import { listNodes } from './api/nodes'
 import { getDecodedToken } from './api/token'
-import { makeBooking, deleteBooking, updateStateRoom } from './api/booking'
+import { makeBooking, deleteBooking, updateStateNode } from './api/booking'
 import Calendar from './components/Calendar'
 import BookingModal from './components/BookingModal'
 import { floorParams, filterParams, capacityParams, onFilterByFloor, onFilterByFeature, onFilterByCapacity, onFilterByAvailablity } from './helpers/filters'
-import { initialRoom } from './helpers/rooms'
+import { initialNode } from './helpers/nodes'
 
 class App extends Component {
   state = {
     decodedToken: getDecodedToken(), // retrieves the token from local storage if valid, else will be null
-    roomData: null,
+    nodeData: null,
     userBookings: null,
     calendarDate: new Date(),
     selectedBooking: null,
@@ -45,7 +45,7 @@ class App extends Component {
     availabilityParam: null,
     filteredData: null,
     checked: null,
-    currentRoom: null,
+    currentNode: null,
     error: null,
     disableRecurring: true
   }
@@ -85,20 +85,20 @@ class App extends Component {
   }
 
   // Makes a booking by updating the database and the React state
-  onMakeBooking = ({ startDate, endDate, businessUnit, purpose, roomId, recurringData }) => {
-    const bookingData = { startDate, endDate, businessUnit, purpose, roomId }
-    const existingBookings = this.state.currentRoom.bookings
+  onMakeBooking = ({ startDate, endDate, businessUnit, purpose, nodeId, recurringData }) => {
+    const bookingData = { startDate, endDate, businessUnit, purpose, nodeId }
+    const existingBookings = this.state.currentNode.bookings
 
     // Check if there is a clash and, if not, save the new booking to the database
     try {
       makeBooking(
-        { startDate, endDate, businessUnit, purpose, roomId, recurringData },
+        { startDate, endDate, businessUnit, purpose, nodeId, recurringData },
         existingBookings
       )
-        .then(updatedRoom => {
+        .then(updatedNode => {
           // If the new booking is successfully saved to the database
-          alert(`${updatedRoom.name} successfully booked.`)
-          updateStateRoom(this, updatedRoom, this.loadMyBookings)
+          alert(`${updatedNode.name} successfully booked.`)
+          updateStateNode(this, updatedNode, this.loadMyBookings)
         })
     } catch (err) {
       // If there is a booking clash and the booking could not be saved
@@ -110,22 +110,22 @@ class App extends Component {
   }
 
   // Deletes a booking from the database and updates the React state
-  onDeleteBooking = (roomId, bookingId) => {
-    deleteBooking(roomId, bookingId)
-      .then(updatedRoom => {
+  onDeleteBooking = (nodeId, bookingId) => {
+    deleteBooking(nodeId, bookingId)
+      .then(updatedNode => {
         alert('Booking successfully deleted')
-        updateStateRoom(
+        updateStateNode(
           this,
-          updatedRoom,
+          updatedNode,
           this.loadMyBookings,
         )
       })
       .catch(error => console.error(error.message))
   }
 
-  setRoom = id => {
-    const room = this.state.roomData.find(room => room._id === id)
-    this.setState({ currentRoom: room })
+  setNode = id => {
+    const node = this.state.nodeData.find(node => node._id === id)
+    this.setState({ currentNode: node })
   }
 
   // setting the feature filter parameters
@@ -171,17 +171,17 @@ class App extends Component {
     this.setState({ availabilityParam: availability })
   }
 
-  // get today's bookings for all rooms
+  // get today's bookings for all nodes
   oneSetCurrentDateBookings = () => {
     const currentDate = moment().format('DD-MM-YYYY')
-    // const roomData = this.state.roomData
-    const roomData = this.state.roomData
+    // const nodeData = this.state.nodeData
+    const nodeData = this.state.nodeData
     // array to collect todays bookings
     let todaysBookings = []
-    // loop through all rooms
-    roomData.forEach(room => {
-      // loop through all bookings for that room
-      room.bookings.forEach(booking => {
+    // loop through all nodes
+    nodeData.forEach(node => {
+      // loop through all bookings for that node
+      node.bookings.forEach(booking => {
         const bookingStart = moment(booking.bookingStart).format('DD-MM-YYYY')
         if (bookingStart === currentDate) {
           todaysBookings.push(booking)
@@ -195,13 +195,13 @@ class App extends Component {
   loadMyBookings = () => {
     let myBookings = []
     const userId = this.state.decodedToken.sub
-    // Loop through all the rooms
-    this.state.roomData.forEach(room => {
-      // Loop through all the bookings in 'room'
-      room.bookings.forEach(booking => {
+    // Loop through all the nodes
+    this.state.nodeData.forEach(node => {
+      // Loop through all the bookings in 'node'
+      node.bookings.forEach(booking => {
         if (booking.user === userId) {
           // Push all bookings where the current userId is equal to the booking's userId into myBookings
-          booking.roomId = room._id
+          booking.nodeId = node._id
           myBookings.push(booking)
         }
       })
@@ -212,9 +212,9 @@ class App extends Component {
   render() {
     const {
       decodedToken,
-      currentRoom,
+      currentNode,
       userBookings,
-      roomData,
+      nodeData,
       calendarDate,
       selectedBooking,
       filterParams,
@@ -235,9 +235,9 @@ class App extends Component {
     const featureParams = this.state.filterParams
     const date = this.state.currentDate
 
-    if (!!roomData) {
-      // Send all room data and the selected floor, return filtered floors and store in filteredData
-      filteredData = onFilterByFloor(floorParam, roomData)
+    if (!!nodeData) {
+      // Send all node data and the selected floor, return filtered floors and store in filteredData
+      filteredData = onFilterByFloor(floorParam, nodeData)
       // Send the previously filtered data along with the feature params
       filteredData = onFilterByFeature(featureParams, filteredData)
       // Send the previously filtered data along with the capacity params
@@ -269,12 +269,12 @@ class App extends Component {
 
                 <Route path="/bookings" exact render={requireAuth(() => (
                   <Fragment>
-                    { !!decodedToken && !roomData && loading && (
+                    { !!decodedToken && !nodeData && loading && (
                       <div className="loading_animation">
                         <Loading />
                       </div>
                     ) }
-                    {!!decodedToken && !!roomData && !loading && (
+                    {!!decodedToken && !!nodeData && !loading && (
                       <div className="wrapper">
                         <div className="header header__nav header--flex">
                           <h1 className="header__heading header__heading--main">Company Name Here</h1>
@@ -286,7 +286,7 @@ class App extends Component {
                         </div>
                         <div className="wrapper__content">
                           <div className="header__page">
-                            <h2 className="header__heading header__heading--sub">Book a room | {moment(calendarDate).format('MMMM Do YYYY')}</h2>
+                            <h2 className="header__heading header__heading--sub">Book a node | {moment(calendarDate).format('MMMM Do YYYY')}</h2>
                           </div>
                           <div className="sidebar">
                             <div className="sidebar__box">
@@ -313,12 +313,12 @@ class App extends Component {
                             </div>
                           </div>
                           <div className="content">
-                            <RoomsList
-                              rooms={filteredData}
-                              onRoomSelect={this.onRoomSelect}
+                            <NodesList
+                              nodes={filteredData}
+                              onNodeSelect={this.onNodeSelect}
                               onShowBooking={this.onShowBooking}
                               date={calendarDate}
-                              onSetRoom={this.setRoom}
+                              onSetNode={this.setNode}
                             />
                           </div>
                          </div>
@@ -326,7 +326,7 @@ class App extends Component {
                           selectedBooking={selectedBooking}
                           onCloseBooking={this.onCloseBooking}
                           onDeleteBooking={onDeleteBooking}
-                          roomData={roomData}
+                          nodeData={nodeData}
                           user={decodedToken.email}
                         />
                       </div>
@@ -338,8 +338,8 @@ class App extends Component {
                   () => (
                     <Fragment>
                       {!!decodedToken &&
-                        !!roomData &&
-                        !!currentRoom && (
+                        !!nodeData &&
+                        !!currentNode && (
                           <div className="wrapper">
                             <header className="header header__nav header--flex">
                               <h1 className="header__heading header__heading--main">Company Name Here</h1>
@@ -352,7 +352,7 @@ class App extends Component {
                             <div className="wrapper__content">
                               <BookingForm
                                 user={decodedToken.email}
-                                roomData={currentRoom}
+                                nodeData={currentNode}
                                 onMakeBooking={this.onMakeBooking}
                                 date={calendarDate}
                                 disableRecurring={disableRecurring}
@@ -365,7 +365,7 @@ class App extends Component {
                                 selectedBooking={selectedBooking}
                                 onCloseBooking={this.onCloseBooking}
                                 onDeleteBooking={onDeleteBooking}
-                                roomData={roomData}
+                                nodeData={nodeData}
                                 user={decodedToken.email}
                               />
                         </div>
@@ -377,7 +377,7 @@ class App extends Component {
                 <Route path="/mybookings" exact render={requireAuth(() => (
                     <Fragment>
                       {!!decodedToken &&
-                        !!roomData && (
+                        !!nodeData && (
                           <div className="wrapper">
                             <div className="header header__nav header--flex">
                               <h1 className="header__heading header__heading--main">Company Name Here</h1>
@@ -392,7 +392,7 @@ class App extends Component {
                                 <h2 className="header__heading header__heading--sub">My Bookings</h2>
                               </div>
                               <MyBookings
-                                roomData={roomData}
+                                nodeData={nodeData}
                                 user={decodedToken.email}
                                 userBookings={userBookings}
                                 onDeleteBooking={onDeleteBooking}
@@ -421,20 +421,20 @@ class App extends Component {
     if (signedIn) {
       // display loading page
       this.setState({ loading: true })
-      // load all of the rooms from the database
-      listRooms()
-        .then(rooms => {
-          this.setState({ roomData: rooms })
+      // load all of the nodes from the database
+      listNodes()
+        .then(nodes => {
+          this.setState({ nodeData: nodes })
           // load the current user's bookings
           this.loadMyBookings()
-          // the state's current room defaults to first room
-          const room = this.state.roomData[0]
-          this.setRoom(room._id)
+          // the state's current node defaults to first node
+          const node = this.state.nodeData[0]
+          this.setNode(node._id)
           // toggle loading page off
           this.setState({ loading: false })
         })
         .catch(error => {
-          console.error('Error loading room data', error)
+          console.error('Error loading node data', error)
           this.setState({ error })
         })
     }

@@ -1,4 +1,4 @@
-# Room Booking System
+# Node Booking System
 A room booking system built with MongoDB, Express, Node.js and ReactJS.
 
 ![Logo](docs/logo.png)
@@ -154,7 +154,7 @@ Using Trello we began adding all tasks and delegating work between each member o
 
 [Trello Board](https://trello.com/b/7Wo4BQjs)
 
-![Project Work Breakvbown](docs/RoomBookingSystem-ProjectWorkBreakdown.png)
+![Project Work Breakvbown](docs/NodeBookingSystem-ProjectWorkBreakdown.png)
 
 ### Audience
 - Management staff
@@ -238,23 +238,23 @@ Using Trello we began adding all tasks and delegating work between each member o
 ### Entity Relationship Diagram
 
 #### Version 1
-![Entity Relationship Diagram | Version 1](docs/RoomBookingSystem-ERD-v1.png)
+![Entity Relationship Diagram | Version 1](docs/NodeBookingSystem-ERD-v1.png)
 #### Version 2
-![Entity Relationship Diagram | Version 2](docs/RoomBookingSystem-ERD-v2.png)
+![Entity Relationship Diagram | Version 2](docs/NodeBookingSystem-ERD-v2.png)
 ## Design
 We designed the application to be an intuitive and simple, yet powerful way to navigate, analyse and create bookings. This ultimately enables the efficient use of resources.
 
 ### Wireframes
 
-[View wireframes in Figma](https://www.figma.com/file/M5AfR3iuOLO437LBDP1p9IXX/Room-Booking-System-Final)
-#### Room View
-![Desktop | Room View](docs/Desktop-RoomView.png)
+[View wireframes in Figma](https://www.figma.com/file/M5AfR3iuOLO437LBDP1p9IXX/Node-Booking-System-Final)
+#### Node View
+![Desktop | Node View](docs/Desktop-NodeView.png)
 
 #### Booking View
 ![Desktop | Booking View](docs/Desktop-BookingView.png)
 
 ### Prototype
-[View prototype in Figma](https://www.figma.com/proto/M5AfR3iuOLO437LBDP1p9IXX/Room-Booking-System-Final?scaling=contain&node-id=13%3A966)
+[View prototype in Figma](https://www.figma.com/proto/M5AfR3iuOLO437LBDP1p9IXX/Node-Booking-System-Final?scaling=contain&node-id=13%3A966)
 ## Development
 
 ### Requirements
@@ -269,7 +269,7 @@ We designed the application to be an intuitive and simple, yet powerful way to n
 [x] README
 
 ### Trello
-![Trello | Room Booking System](docs/RoomBookingSystem-Trello.png)
+![Trello | Node Booking System](docs/NodeBookingSystem-Trello.png)
 
 ### Technologies
 - Node.js

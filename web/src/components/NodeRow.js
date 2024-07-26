@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { formatAssetName, dailyBookings, bookingArray } from '../helpers/rooms'
+import { formatAssetName, dailyBookings, bookingArray } from '../helpers/nodes'
 
-// Accept the 24 hour dayHours array as the day's booking data for a room
+// Accept the 24 hour dayHours array as the day's booking data for a node
 const rowMapper = (dayHours, props) => {
   let tableRow = []
 
@@ -16,7 +16,7 @@ const rowMapper = (dayHours, props) => {
     if (typeof bookingData == 'number') {
       tableRow.push(<td className="table__cell--available">
           <Link to="/createbooking" onClick={() => {
-              props.onSetRoom(props.room._id)
+              props.onSetNode(props.node._id)
         }} className="table__link--available">
             &nbsp;
           </Link>
@@ -86,14 +86,14 @@ const rowMapper = (dayHours, props) => {
   return tableRow
 }
 
-const RoomRow = props => (
+const NodeRow = props => (
   <tr className="table__row">
     <th scope="row" className="table__cell--align-left">
-      <Link to="/createbooking" onClick={() => props.onSetRoom(props.room._id)} className="table__link">{props.room.name}</Link>
+      <Link to="/createbooking" onClick={() => props.onSetNode(props.node._id)} className="table__link">{props.node.name}</Link>
       <ul >
-      {Object.keys(props.room.assets).map(
+      {Object.keys(props.node.assets).map(
         asset =>
-          props.room.assets[asset] && (
+          props.node.assets[asset] && (
             <li key={asset} onClick={props.onShowBooking} className="table__data--asset">{formatAssetName(asset)}</li>
             )
           )}
@@ -106,4 +106,4 @@ const RoomRow = props => (
   </tr>
 )
 
-export default RoomRow
+export default NodeRow

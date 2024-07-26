@@ -66,14 +66,14 @@ export const formatTime = (time) => {
   return formatedTimeArray
 }
 
-// Find the Room and floor number from the booking ID
-export const findRoomInfo = (roomId, roomData) => {
-  let roomInfo
-  roomData.forEach(room => {
-    if (room._id === roomId) {
-      roomInfo = room
+// Find the Node and floor number from the booking ID
+export const findNodeInfo = (nodeId, nodeData) => {
+  let nodeInfo
+  nodeData.forEach(node => {
+    if (node._id === nodeId) {
+      nodeInfo = node
     }
   })
-  return roomInfo
+  return nodeInfo
 }
 

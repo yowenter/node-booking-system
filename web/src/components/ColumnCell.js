@@ -1,9 +1,9 @@
 import React from 'react'
-import { dailyBookings, bookingArray } from '../helpers/rooms'
+import { dailyBookings, bookingArray } from '../helpers/nodes'
 
 const ColumnCell = props => {
 
-  // Get the day's bookings for a room
+  // Get the day's bookings for a node
   let bookings = dailyBookings(props.date, props.bookings)
 
   // Add the day's bookings to a 24 hour array

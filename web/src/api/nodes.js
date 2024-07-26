@@ -2,6 +2,6 @@ import React from 'react'
 import moment from 'moment'
 import api from './init'
 
-export function listRooms() {
-  return api.get('/rooms').then(res => res.data)
+export function listNodes() {
+  return api.get('/nodes').then(res => res.data)
 }

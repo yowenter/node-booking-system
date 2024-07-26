@@ -29,6 +29,7 @@ const signUp = (req, res, next) => {
   })
 
   req.user = user
+  console.log("user signup: ", user)
   next()
 }
 
@@ -56,9 +57,11 @@ passport.use(
       algorithms: [jwtAlgorithm]
     },
     (payload, done) => {
+      console.log("passport payload: ", payload)
       User.findById(payload.sub)
         .then(user => {
           if (user) {
+            console.log("user found: ",user)
             done(null, user)
           } else {
             done(null, false)
@@ -74,7 +77,7 @@ passport.use(
 module.exports = {
   initialize: passport.initialize(),
   signUp,
-  signIn: passport.authenticate('local', { session: false }),
+  signIn: passport.authenticate('jwt', { session: false }),
   requireJWT: passport.authenticate('jwt', { session: false }),
   signJWTForUser
 }

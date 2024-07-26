@@ -1,7 +1,7 @@
-const Room = require('./Room')
+const Node = require('./Nodes')
 const User = require('./User')
 
-Room.deleteMany()
+Node.deleteMany()
   .then(() => {
     console.log('Deleted rooms')
     process.exit()
